@@ -10,7 +10,7 @@ app.use(express.json());
 //enable localhost:3000 to make requests to our APIRest
 app.use(
   cors({
-    origin: "http:localhost:3000",
+    origin: ["http://localhost:3000", "http://127.0.0.1:3000"]
   })
 );
 
