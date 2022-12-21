@@ -3,8 +3,7 @@ import { THEME } from "../../theme";
 
 export const styles = StyleSheet.create({
   container: {
-    width: 30,
-    marginRight: 240,
+    marginRight: 20,
   },
 
   cover: {
@@ -16,21 +15,21 @@ export const styles = StyleSheet.create({
   },
 
   footer: {
-    width: '100%',
+    width: "100%",
     height: 102,
     padding: 16,
-    justifyContent: 'flex-end'
+    justifyContent: "flex-end",
   },
 
   name: {
     color: THEME.COLORS.TEXT,
     fontSize: THEME.FONT_SIZE.MD,
-    fontFamily: THEME.FONT_FAMILY.BOLD
+    fontFamily: THEME.FONT_FAMILY.BOLD,
   },
 
   ads: {
     color: THEME.COLORS.CAPTION_300,
     fontSize: THEME.FONT_SIZE.MD,
-    fontFamily: THEME.FONT_FAMILY.REGULAR
-  }
+    fontFamily: THEME.FONT_FAMILY.REGULAR,
+  },
 });

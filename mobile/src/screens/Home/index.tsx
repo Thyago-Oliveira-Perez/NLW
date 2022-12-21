@@ -39,7 +39,7 @@ export function Home() {
           data={games}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <GameCard onPressOut={() => handleNavigate(item)} data={item} />
+            <GameCard onPress={() => handleNavigate(item)} data={item} />
           )}
           showsHorizontalScrollIndicator={false}
           horizontal
