@@ -1,35 +1,50 @@
-import { useEffect } from "react";
-import { View, Image, FlatList } from "react-native";
+import { useEffect, useState } from "react";
+import { Image, FlatList } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import logoImg from "../../assets/logo-nlw-esports.png";
 import { Header } from "../../components/Header";
 import { GameCard } from "../../components/GameCard";
 import { styles } from "./styles";
-import { GAMES } from "../../utils/games";
+import { GameCardProps } from "../../components/GameCard/types";
+import { Background } from "../../components/Background";
+import { useNavigation } from "@react-navigation/native";
 
 export function Home() {
+  const [games, setGames] = useState<GameCardProps[]>([]);
+
+  const navigate = useNavigation();
+
   useEffect(() => {
-    fetch("http://172.17.0.1:3033/games")
+    fetch("http://192.168.1.6:3033/games")
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => setGames(data));
   }, []);
 
-  return (
-    <View style={styles.container}>
-      <Image source={logoImg} style={styles.logo} />
-      <Header
-        title="Encontre seu duo!"
-        subtitle="Selecione o game que deseja jogar..."
-      />
+  const handleNavigate = (game: GameCardProps) => {
+    navigate.navigate("game", game);
+  };
 
-      <FlatList
-        contentContainerStyle={styles.contentList}
-        data={GAMES}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <GameCard data={item} />}
-        showsHorizontalScrollIndicator={false}
-        horizontal
-      />
-    </View>
+  return (
+    <Background>
+      <SafeAreaView style={styles.container}>
+        <Image source={logoImg} style={styles.logo} />
+        <Header
+          title="Encontre seu duo!"
+          subtitle="Selecione o game que deseja jogar..."
+        />
+
+        <FlatList
+          contentContainerStyle={styles.contentList}
+          data={games}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <GameCard onPressOut={() => handleNavigate(item)} data={item} />
+          )}
+          showsHorizontalScrollIndicator={false}
+          horizontal
+        />
+      </SafeAreaView>
+    </Background>
   );
 }
