@@ -11,18 +11,18 @@ import logoImg from "../../assets/logo-nlw-esports.png";
 import { Header } from "../../components/Header";
 
 export function Game() {
-
   const navigation = useNavigation();
   const route = useRoute();
   const game = route.params as GameCardProps;
 
   const handleGoBack = () => {
     navigation.goBack();
-  }
+  };
 
   return (
     <Background>
       <SafeAreaView style={styles.container}>
+        {/* Header da tela, com a logo e o botão de voltar */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => handleGoBack()}>
             <Entypo
@@ -37,10 +37,13 @@ export function Game() {
           <View style={styles.invisibleIcon} />
         </View>
 
-        <Header
-          title={game.title}
-          subtitle={"Conecte-se e comece a jogar!"}
+        <Image
+          source={{ uri: game.bannerUrl }}
+          style={styles.cover}
+          resizeMode="cover"
         />
+        {/* Título do jogo */}
+        <Header title={game.title} subtitle={"Conecte-se e comece a jogar!"} />
       </SafeAreaView>
     </Background>
   );
